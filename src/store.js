@@ -5,10 +5,8 @@ import {
     FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import { getFirebase, actionTypes as rrfActionTypes } from 'react-redux-firebase'
-import { constants as rfConstants } from 'redux-firestore'
 
-import userReducer from './redux/userSlice'
+import userReducer from './userSlice'
 
 const persistConfig = {
     key: "root",
@@ -18,40 +16,41 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-    
+    //firebase: firebaseReducer,
     user: userReducer
-  })
+})
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 const store = configureStore({
-    reducer: persistedReducer,
+    reducer: persistedReducer
 
-    middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware({
-            serializableCheck: {
-                ignoredActions: [
-                    // just ignore every redux-firebase and react-redux-firebase action type
-                    ...Object.keys(rfConstants.actionTypes).map(
-                        (type) => `${rfConstants.actionsPrefix}/${type}`
-                    ),
-                    ...Object.keys(rrfActionTypes).map(
-                        (type) => `@@reactReduxFirebase/${type}`
-                    ),
-                ],
-                //ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-                //ignoredActionPaths: ['meta.arg', 'payload.timestamp'],
-                ignoredPaths: ['firebase', 'firestore'],
-            },
-
-            thunk: {
-                extraArgument: {
-                    getFirebase,
-                },
-            },
-        }),
+    /*  middleware: (getDefaultMiddleware) =>
+         getDefaultMiddleware({
+             serializableCheck: {
+                 ignoredActions: [
+                     // just ignore every redux-firebase and react-redux-firebase action type
+                     ...Object.keys(rfConstants.actionTypes).map(
+                         (type) => `${rfConstants.actionsPrefix}/${type}`
+                     ),
+                     ...Object.keys(rrfActionTypes).map(
+                         (type) => `@@reactReduxFirebase/${type}`
+                     ),
+                 ],
+                 //ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+                 //ignoredActionPaths: ['meta.arg', 'payload.timestamp'],
+                 ignoredPaths: ['firebase', 'firestore'],
+             },
+ 
+             thunk: {
+                 extraArgument: {
+                     getFirebase,
+                 },
+             },
+         }), */
 })
 
 const persistor = persistStore(store)
+
 
 export { store, persistor }
