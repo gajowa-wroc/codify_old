@@ -4,6 +4,9 @@ module.exports = {
     './src/**/*.{js,jsx,ts,tsx}',
   ],
   theme: {
+    fontFamily: {
+      sans: ['Menlo', 'DejaVu Sans Mono', 'Consolas', 'Lucida Console', 'monospace'],
+    },
     extend: {
       screen: {
       'xs': '470px',

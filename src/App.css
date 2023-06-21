@@ -41,3 +41,26 @@
   justify-content: center;
   align-items: center;
 }
+
+.input-cursor {
+  caret-width: 4px;
+  caret-height: 6px;
+  caret-color: red; 
+}
+
+::selection {
+  background-color: rgb(153 27 27);
+  color: white;
+}
+
+.input-prefix {
+  display: flex;
+  
+  //align-items: center;
+}
+
+.prefix {
+  display: flex;
+  
+}
+
