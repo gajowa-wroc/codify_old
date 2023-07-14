@@ -1,6 +1,4 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
-import Functions from './Functions'
 
 const TerminalRead = () => {
     //const, let...

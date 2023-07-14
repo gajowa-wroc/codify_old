@@ -1,5 +1,5 @@
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { setUser } from "../userSlice";
+import { setUser } from "../redux/userSlice";
 import { auth } from "../firebase_connect";
 
 export const signup = (dispatch, props) => {

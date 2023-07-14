@@ -6,7 +6,8 @@ import {
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
-import userReducer from './userSlice'
+import userReducer from './redux/userSlice'
+import outputReducer from './redux/outputSlice'
 
 const persistConfig = {
     key: "root",
@@ -17,7 +18,8 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
     //firebase: firebaseReducer,
-    user: userReducer
+    user: userReducer,
+    output: outputReducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

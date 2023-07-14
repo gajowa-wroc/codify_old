@@ -1,13 +1,19 @@
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase_connect";
-import { removeUser, setUser } from "../userSlice";
+import { removeUser } from "../redux/userSlice";
+import { addOutput } from "../redux/outputSlice";
 
-export const logout = (dispatch) => {
-    signOut(auth)
+export const logout = async(dispatch) => {
+    //return new Promise((resolve, reject) => {
+    await signOut(auth)
         .then(() => {
             console.log('logout successfully!');
-            //setLoggedUserName("You")
             dispatch(removeUser())
+            dispatch(addOutput("Logout successfully"))
         })
-        .catch(err => console.log("logout_err:", err))
+        .catch(err => {
+            console.log("logout_err:", err)
+            dispatch(addOutput("Logout failed"))
+        })
+    //})
 }

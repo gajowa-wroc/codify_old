@@ -1,9 +1,10 @@
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { setUser } from '../userSlice';
+import { setUser } from '../redux/userSlice';
 import { auth } from '../firebase_connect';
+import { addOutput } from '../redux/outputSlice';
 
-export const login = (dispatch, props) => {
-    signInWithEmailAndPassword(auth, props[0], props[1])
+export const login = async(dispatch, props) => {
+    await signInWithEmailAndPassword(auth, props[0], props[1])
         .then(({ user }) => {
             dispatch(setUser({
                 id: user.uid,
@@ -12,7 +13,11 @@ export const login = (dispatch, props) => {
                 token: user.accessToken,
                 email_verified: user.emailVerified
             }));
-            console.log("login_firebase", user);
+            console.log("login successfully", user);
+            dispatch(addOutput("Login successfully"))
         })
-        .catch(err => console.log("login_firebase_err:", err));
+        .catch(err => {
+            console.log("login_firebase_err:", err)
+            dispatch(addOutput("Login failed"))
+        });
 };

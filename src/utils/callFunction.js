@@ -18,8 +18,8 @@ export const callFunction = (output, dispatch) => {
             const func = functionMap[functionName];
             func(dispatch, props); // Call the corresponding function with props
         }
-    }
-};
+    };
+}
 
 const parsePropsString = (propsString) => {
     const propsArray = propsString.split(",").map(prop => {
