@@ -1,6 +1,5 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import PrefixedInput from './InputPrefix';
 import { useDispatch, useSelector } from 'react-redux';
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from 'firebase/auth';
 import { auth } from '../firebase_connect';
@@ -163,19 +162,19 @@ const TerminalWrite = () => {
                     )
                 })}
 
-                <PrefixedInput
-                    prefix={prefix}
-                    className='input-cursor bg-black focus:outline-none font-sans w-full'
-                    type='text'
-                    value={input}
-                    onChange={e => setInput(e.target.value)}
-                    onKeyDown={e => {
-                        if (e.key === "Enter") {
-                            setOutput(e.target.value)
-                            setInput("")
-                        }
-                    }}
-                />
+                <div className="input-prefix">
+                    <span className="prefix">{prefix}</span>
+                    <input className='input-cursor bg-black focus:outline-none font-sans w-full'
+                        type='text'
+                        value={input}
+                        onChange={e => setInput(e.target.value)}
+                        onKeyDown={e => {
+                            if (e.key === "Enter") {
+                                setOutput(e.target.value)
+                                setInput("")
+                            }
+                        }} />
+                </div>
 
             </div>
         </div>
