@@ -14,6 +14,7 @@ const initialState = {
     userEmail: "",
     userToken: "",
     userEmail_verified: false,
+    userDisplayName: "You",
 
     error: null,
     success: false, // for monitoring the registration process.
@@ -41,12 +42,14 @@ const userSlice = createSlice({
             state.userEmail = action.payload.email
             state.userToken = action.payload.token
             state.userEmail_verified = action.payload.token
+            state.userDisplayName = action.payload.name
         },
         removeUser(state) {
             state.userId = ""
             state.userName = ""
             state.userEmail = ""
             state.userToken = ""
+            state.userDisplayName = "You"
         },
     },
     /*extraReducers: (builder) => {   //for example, the extraReducers field in the counterSlice handles the logout action dispatched by the authSlice. When the logout action is dispatched, the extra reducer sets the counter state to 0.
